@@ -1,7 +1,4 @@
-from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import QFileInfo
-from PyQt5.QtGui import *
-import sys
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtGui import *
 import sys
@@ -10,8 +7,8 @@ from qgis.gui import *
 
 
 class Ventana(QtWidgets.QMainWindow):
-    def _init_(self):
-        super(Ventana, self)._init_()
+    def __init__(self):
+        super(Ventana, self).__init__()
         uic.loadUi('visor.ui', self)
         # carga el diseño
 
@@ -59,9 +56,13 @@ class Ventana(QtWidgets.QMainWindow):
         self.mapa.show()
         self.mapa.refresh()
 
-        print("funciona la accion de agregar capa")
+       # print("funciona la accion de agregar capa")
 
 # se crea un objeto
 aplicacion = QtWidgets.QApplication(sys.argv)
+ruta_qgis = r'C:\Program Files\QGIS 3.32.2\apps\qgis'
+QgsApplication.setPrefixPath(ruta_qgis)
+QgsApplication.initQgis()
 ventana = Ventana()
 aplicacion.exec_()
+QgsApplication.exitQgis()
